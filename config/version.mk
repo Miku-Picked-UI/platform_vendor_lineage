@@ -1,45 +1,11 @@
-PRODUCT_VERSION_MAJOR = 23
-PRODUCT_VERSION_MINOR = 2
+# SPDX-FileCopyrightText: 2026 Miku-Picked UI
+# SPDX-License-Identifier: Apache-2.0
+#
+# LineageOS 23.2 device-tree compatibility layer for Miku-Picked UI.
+# Device trees written for LineageOS inherit vendor/lineage/config/*;
+# in Miku-Picked UI the real product configuration lives in vendor/miku.
 
-ifeq ($(LINEAGE_VERSION_APPEND_TIME_OF_DAY),true)
-    LINEAGE_BUILD_DATE := $(shell date -u +%Y%m%d_%H%M%S)
-else
-    LINEAGE_BUILD_DATE := $(shell date -u +%Y%m%d)
-endif
-
-# Set LINEAGE_BUILDTYPE from the env RELEASE_TYPE, for jenkins compat
-
-ifndef LINEAGE_BUILDTYPE
-    ifdef RELEASE_TYPE
-        # Starting with "LINEAGE_" is optional
-        RELEASE_TYPE := $(shell echo $(RELEASE_TYPE) | sed -e 's|^LINEAGE_||g')
-        LINEAGE_BUILDTYPE := $(RELEASE_TYPE)
-    endif
-endif
-
-# Filter out random types, so it'll reset to UNOFFICIAL
-ifeq ($(filter RELEASE NIGHTLY SNAPSHOT EXPERIMENTAL,$(LINEAGE_BUILDTYPE)),)
-    LINEAGE_BUILDTYPE := UNOFFICIAL
-    LINEAGE_EXTRAVERSION :=
-endif
-
-ifeq ($(LINEAGE_BUILDTYPE), UNOFFICIAL)
-    ifneq ($(TARGET_UNOFFICIAL_BUILD_ID),)
-        LINEAGE_EXTRAVERSION := -$(TARGET_UNOFFICIAL_BUILD_ID)
-    endif
-endif
-
-LINEAGE_VERSION_SUFFIX := $(LINEAGE_BUILD_DATE)-$(LINEAGE_BUILDTYPE)$(LINEAGE_EXTRAVERSION)-$(LINEAGE_BUILD)
-
-# Internal version
-LINEAGE_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(LINEAGE_VERSION_SUFFIX)
-
-# Display version
-LINEAGE_DISPLAY_VERSION := $(PRODUCT_VERSION_MAJOR)-$(LINEAGE_VERSION_SUFFIX)
-
-# LineageOS version properties
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.lineage.version=$(LINEAGE_VERSION) \
-    ro.lineage.display.version=$(LINEAGE_DISPLAY_VERSION) \
-    ro.lineage.build.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR) \
-    ro.lineage.releasetype=$(LINEAGE_BUILDTYPE)
+# Some LineageOS device trees put $(LINEAGE_VERSION) in the kernel
+# command line (e.g. mtdoops/swinfo fingerprints). Keep it meaningful.
+LINEAGE_VERSION = MikuPickedUI-$(PLATFORM_MIKU_VERSION)-$(TARGET_DEVICE)
+LINEAGE_COMPAT_LAYER := true

@@ -1,40 +1,9 @@
-# Inherit common Lineage stuff
-$(call inherit-product, vendor/lineage/config/common_mobile.mk)
+# SPDX-FileCopyrightText: 2026 Miku-Picked UI
+# SPDX-License-Identifier: Apache-2.0
+#
+# LineageOS 23.2 device-tree compatibility layer for Miku-Picked UI.
+# Device trees written for LineageOS inherit vendor/lineage/config/*;
+# in Miku-Picked UI the real product configuration lives in vendor/miku.
 
-PRODUCT_SIZE := full
-
-# Include GoogleSansFlex font
-$(call inherit-product-if-exists, external/google-fonts/google-sans-flex/fonts.mk)
-
-# Apps
-PRODUCT_PACKAGES += \
-    Camelot \
-    Etar \
-    Profiles \
-    Recorder \
-    Seedvault \
-    Twelve
-
-ifneq ($(PRODUCT_NO_CAMERA),true)
-PRODUCT_PACKAGES += \
-    Aperture
-endif
-
-ifneq ($(TARGET_EXCLUDES_AUDIOFX),true)
-PRODUCT_PACKAGES += \
-    AudioFX
-endif
-
-# Extra cmdline tools
-PRODUCT_PACKAGES += \
-    unrar \
-    zstd
-
-# Fonts
-PRODUCT_PACKAGES += \
-    fonts_customization.xml \
-    FontGoogleSansFlexOverlay
-
-# Include Lineage LatinIME dictionaries
-PRODUCT_PACKAGE_OVERLAYS += vendor/lineage/overlay/dictionaries
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += vendor/lineage/overlay/dictionaries
+$(call inherit-product, vendor/lineage/config/version.mk)
+$(call inherit-product, vendor/miku/build/product/miku_product.mk)

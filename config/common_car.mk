@@ -1,5 +1,8 @@
-# Inherit common Lineage stuff
-$(call inherit-product, vendor/lineage/config/common.mk)
+# SPDX-FileCopyrightText: 2026 Miku-Picked UI
+# SPDX-License-Identifier: Apache-2.0
+#
+# LineageOS 23.2 device-tree compatibility layer for Miku-Picked UI.
+# Device trees written for LineageOS inherit vendor/lineage/config/*;
+# in Miku-Picked UI the real product configuration lives in vendor/miku.
 
-# Inherit Lineage car device tree
-$(call inherit-product, device/lineage/car/lineage_car.mk)
+$(error Miku-Picked UI does not support Android TV or Automotive products ($(lastword $(MAKEFILE_LIST))).)

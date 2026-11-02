@@ -1,30 +1,12 @@
-# GMS
-ifeq ($(WITH_GMS),true)
-WITH_GMS_COMMS_SUITE := true
-endif
+# SPDX-FileCopyrightText: 2026 Miku-Picked UI
+# SPDX-License-Identifier: Apache-2.0
+#
+# LineageOS 23.2 device-tree compatibility layer for Miku-Picked UI.
+# Device trees written for LineageOS inherit vendor/lineage/config/*;
+# in Miku-Picked UI the real product configuration lives in vendor/miku.
+#
+# Telephony bits. vendor/miku/build/product/miku_product.mk already ships
+# apns-conf.xml, messaging and Stk; only Lineage defaults are added here.
 
-# Sensitive Phone Numbers list
-PRODUCT_PACKAGES += \
-    sensitive_pn.xml
-
-# World APN list
-PRODUCT_PACKAGES += \
-    apns-conf.xml
-
-# Telephony packages
-PRODUCT_PACKAGES += \
-    messaging \
-    Stk
-
-# Default ringtone
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.config.ringtone=Orion.ogg
-
-# Tethering - allow without requiring a provisioning app
-# (for devices that check this)
 PRODUCT_PRODUCT_PROPERTIES += \
     net.tethering.noprovisioning=true
-
-# Disable mobile data by default
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.com.android.mobiledata=false

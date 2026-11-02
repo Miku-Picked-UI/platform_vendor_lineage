@@ -1,19 +1,8 @@
-# Inherit common Lineage stuff
-$(call inherit-product, vendor/lineage/config/common.mk)
+# SPDX-FileCopyrightText: 2026 Miku-Picked UI
+# SPDX-License-Identifier: Apache-2.0
+#
+# LineageOS 23.2 device-tree compatibility layer for Miku-Picked UI.
+# Device trees written for LineageOS inherit vendor/lineage/config/*;
+# in Miku-Picked UI the real product configuration lives in vendor/miku.
 
-# Include AOSP audio files
-$(call inherit-product-if-exists, frameworks/base/data/sounds/AudioTv.mk)
-
-# Inherit Lineage atv device tree
-$(call inherit-product, device/lineage/atv/lineage_atv.mk)
-
-# AOSP packages
-PRODUCT_PACKAGES += \
-    LeanbackIME
-
-# Lineage packages
-PRODUCT_PACKAGES += \
-    Catapult \
-    LineageCustomizer
-
-PRODUCT_PACKAGE_OVERLAYS += vendor/lineage/overlay/tv
+$(error Miku-Picked UI does not support Android TV or Automotive products ($(lastword $(MAKEFILE_LIST))).)
