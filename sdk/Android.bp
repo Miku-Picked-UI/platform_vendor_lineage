@@ -1,0 +1,19 @@
+//
+// SPDX-FileCopyrightText: The LineageOS Project
+// SPDX-FileCopyrightText: 2026 Miku-Picked UI
+// SPDX-License-Identifier: Apache-2.0
+//
+// Miku-Picked UI does not ship lineage-sdk (its system service needs
+// LineageOS framework changes). Device apps from LineageOS hardware repos,
+// such as SamsungDoze and AdvancedDisplay in hardware/samsung, only link
+// org.lineageos.platform.internal statically for small helper classes, so
+// this provides those classes, copied unchanged from lineage-sdk
+// (https://github.com/LineageOS/android_lineage-sdk, lineage-23.2).
+//
+// Add more classes here when a device app needs them. Remove this module if
+// the real lineage-sdk is ever added to the manifest.
+
+java_library {
+    name: "org.lineageos.platform.internal",
+    srcs: ["src/**/*.java"],
+}

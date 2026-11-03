@@ -6,5 +6,6 @@
 # in Miku-Picked UI the real product configuration lives in vendor/miku.
 
 $(call inherit-product, vendor/lineage/config/version.mk)
+$(call inherit-product, vendor/lineage/config/lineage_interfaces.mk)
 $(call inherit-product, vendor/miku/build/product/miku_product_tab.mk)
 $(call inherit-product, vendor/lineage/config/wifionly.mk)
